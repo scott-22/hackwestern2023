@@ -8,7 +8,6 @@ contract Verification {
       string userInfo;
     }
     mapping(address => User) public users;
-    // address[16] public adopters;
 
   constructor() {
     cra = msg.sender;
@@ -49,15 +48,5 @@ contract Verification {
     );
     users[target].isVerified = false;
   }
-
-/* Adopting a pet
-function adopt(uint petId) public returns (uint) {
-  require(petId >= 0 && petId <= 15);
-
-  adopters[petId] = msg.sender;
-
-  return petId;
-}
-*/
 
 }

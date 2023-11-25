@@ -7,8 +7,21 @@ function CRApage() {
   const [userData, setUserData] = useState("");
 
   const verifyIsCRA = useCallback(async () => {
-    const currentAddress = (await provider.listAccounts())[0];
+    let signer = null;
+    let provider;
+    if (window.ethereum == null) {
+        console.log("MetaMask not installed; using read-only defaults")
+        provider = ethers.getDefaultProvider()
+    } else {
+        provider = new ethers.BrowserProvider(window.ethereum)
+        signer = await provider.getSigner();
+    }
+
+    await window.ethereum.send('eth_requestAccounts');
+    const currentAddress = (await provider.listAccounts())[0].address;
+    console.log(currentAddress)
     const craAddress = (await (await fetch(`http://127.0.0.1:3001/contract/minter-address`)).json()).address;
+    console.log(craAddress)
     if (currentAddress === craAddress)
       setIsCRA(true);
   }, []);
