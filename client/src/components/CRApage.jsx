@@ -48,7 +48,7 @@ function CRApage() {
 
     const contract = new ethers.Contract(contractAddress, abi, signer);
     return { contract: contract, address: currentAddress };
-  });
+  }, []);
 
   const getContractUserInfo = useCallback(async (target) => {
     const { contract, address } = await getContract();
@@ -66,12 +66,12 @@ function CRApage() {
     }
     
     setDisplayTargetAddr(target);
-  })
+  }, []);
 
   const onTargetAddrChange = useCallback((event) => {
     let text = event.target.value;
     setTargetAddr(text);
-  });
+  }, []);
 
   const onTargetAddrSubmit = useCallback((event) => {
     event.preventDefault();
@@ -79,7 +79,7 @@ function CRApage() {
       console.log(targetAddr);
       getContractUserInfo(targetAddr);
     }
-  });
+  }, []);
 
   useEffect(() => {
     verifyIsCRA();
