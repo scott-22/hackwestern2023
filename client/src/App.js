@@ -4,7 +4,7 @@ import {
   BrowserRouter as Router,
   Router,
   Route,
-  Switch
+  Routes
 } from "react-router-dom";
 import Homepage from './components/Homepage';
 import Userpage from './components/Userpage';
@@ -15,23 +15,17 @@ import Login from "./components/Login.jsx"
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/">
-          <Homepage />
-        </Route>
-        <Route path="/user">
-          <Userpage />
-        </Route>
-        <Route path="/cra">
-          <CRApage />
-        </Route>
-        <Route path="/overview">
-          <Overviewpage />
-        </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+
+        <Route path="/user" element={<Userpage />} />
+        
+        <Route path="/cra" element={<CRApage />} />
+        
+        <Route path="/overview" element={<Overviewpage />} />
+
+        <Route path="/login" element={<Login />} />
+      </Routes>
     </Router>
   );
 }
