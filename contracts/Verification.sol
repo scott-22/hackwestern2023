@@ -5,7 +5,7 @@ contract Verification {
     
     struct User {
       bool verStatus;
-      string enid;
+      string userInfo;
     }
     mapping(address => User) public users;
     // address[16] public adopters;
@@ -14,7 +14,7 @@ constructor() {
   cra = msg.sender;
 
   users[msg.sender].verStatus = true;
-  users[msg.sender].enid = "cra";
+  users[msg.sender].userInfo = "cra";
 }
 
 // Retrieving the verStatus
@@ -23,8 +23,8 @@ function getVerStatus() public view returns (bool) {
 }
 
 // Retrieving the enid
-function getEnid() public view returns (string) {
-  return users[msg.sender].enid;
+function getEnid() public view returns (string memory) {
+  return users[msg.sender].userInfo;
 }
 
 // Setting the verStatus
