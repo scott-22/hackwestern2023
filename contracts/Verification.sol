@@ -24,6 +24,11 @@ contract Verification {
 
   // Retrieving the target's userInfo
   function getUserInfo(address target) public view returns (string memory) {
+    require(
+      msg.sender == cra,
+      //getIsVerified(target) == false,
+      "Only cra has right to getUserInfo"
+    );
     return users[target].userInfo;
   }
 
