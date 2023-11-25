@@ -2,25 +2,20 @@ import logo from './logo.svg';
 import { useState, useEffect, useCallback } from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
+  Routes,
   Route,
   Link
 } from "react-router-dom";
+import Login from "./components/Login.jsx"
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route path="/">
-          <Homepage />
-        </Route>
-        <Route path="/user">
-          <Userpage />
-        </Route>
-        <Route path="/cra">
-          <CRApage />
-        </Route>
-      </Switch>
+      <Routes>
+        
+        <Route path="/login" element={<Login />} />
+        
+      </Routes>
     </Router>
   );
 }
