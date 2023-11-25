@@ -18,4 +18,9 @@ router.get('/abi', function(req, res, next) {
   res.send(VerificationContract["abi"]);
 });
 
+// Send all test addresses for visualization
+router.get('/all-addresses', function(req, res, next) {
+  res.send(process.env.ALL_ADDRESSES);
+});
+
 module.exports = router;

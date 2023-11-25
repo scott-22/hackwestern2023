@@ -108,7 +108,7 @@ function CRApage() {
               <button
                 type="submit"
                 onClick={onTargetAddrSubmit}
-                className="text-blue-900 mt-2 ml-5 border-[1px] p-1 border-[#8292bb] hover:bg-[#2a427e] hover:text-white rounded-sm cursor-pointer"
+                className="text-blue-900 mt-2 ml-5 border-[1px] p-1 border-[#2a427e] hover:bg-[#2a427e] hover:text-white rounded-sm cursor-pointer"
               >
                 Submit
               </button>
