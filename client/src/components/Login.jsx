@@ -12,11 +12,17 @@ function Login() {
     console.log(userdata);
   }
 
+
+  function submitButton(e) {
+    logMovies();
+    e.preventDefault();
+  }
+
   return (
     <form>
       <label>Name:</label>
       <input type="text"></input>
-      <input type="submit" onClick={logMovies}></input>
+      <input type="submit" onClick={submitButton}></input>
     </form>
   );
 }
