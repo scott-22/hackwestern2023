@@ -74,8 +74,8 @@ function Login() {
         className="bg-white p-8 rounded shadow-md w-96"
         style={{ marginLeft: 'auto', marginRight: 'auto' }}
       >
-        <form className="text-left" onSubmit={handleSubmitSignup}>
-          <div className="mb-4">
+        <form className="text-left flex flex-wrap" onSubmit={handleSubmitSignup}>
+          <div className="mb-4 w-full">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Name:
             </label>
@@ -87,7 +87,7 @@ function Login() {
             />
           </div>
 
-          <div className="mb-8">
+          <div className="mb-8 w-full">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Proof of identity:
             </label>
@@ -100,9 +100,16 @@ function Login() {
 
           <button
             type="submit"
-            className="block mx-auto bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            className="block mx-auto bg-blue-800 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
           >
             Sign Up
+          </button>
+          
+          <button
+            type="button"
+            className="block mx-auto bg-blue-800 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Sign In
           </button>
         </form>
       </div>
