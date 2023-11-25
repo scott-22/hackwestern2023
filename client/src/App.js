@@ -6,6 +6,10 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Homepage from './components/Homepage';
+import Userpage from './components/Userpage';
+import CRApage from './components/CRApage';
+import Overviewpage from './components/Overviewpage';
 
 function App() {
   return (
@@ -19,6 +23,9 @@ function App() {
         </Route>
         <Route path="/cra">
           <CRApage />
+        </Route>
+        <Route path="/overview">
+          <Overviewpage />
         </Route>
       </Switch>
     </Router>
