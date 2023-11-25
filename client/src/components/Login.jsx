@@ -73,9 +73,9 @@ function Login() {
   }
 
   return (
-    <form className = 'signIn' onSubmit= {this.handleSubmitSignin}>
+    <form className = 'signIn' onSubmit= {handleSubmitSignin}>
       <label>Name:</label>
-      <input type="text" onChange={this.handleChangeSignin}></input>
+      <input type="text" onChange={handleChangeSignin}></input>
       <input type="submit" value="Sign In"/>
     </form>
   );
