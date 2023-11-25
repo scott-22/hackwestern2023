@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import { useState, useEffect, useCallback } from 'react';
 import {
   BrowserRouter as Router,
-  Router,
   Route,
   Routes
 } from "react-router-dom";
