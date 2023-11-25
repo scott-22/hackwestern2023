@@ -10,31 +10,40 @@ contract Verification {
     mapping(address => User) public users;
     // address[16] public adopters;
 
-constructor() {
-  cra = msg.sender;
+  constructor() {
+    cra = msg.sender;
 
-  users[msg.sender].isVerified = true;
-  users[msg.sender].userInfo = "cra";
-}
+    users[msg.sender].isVerified = true;
+    users[msg.sender].userInfo = "cra";
+  }
 
-// Retrieving the verStatus
-function getIsVerified() public view returns (bool) {
-  return users[msg.sender].isVerified;
-}
+  // Retrieving the target's verification status
+  function getIsVerified(address target) public view returns (bool) {
+    return users[target].isVerified;
+  }
 
-// Retrieving the enid
-function getUserInfo() public view returns (string memory) {
-  return users[msg.sender].userInfo;
-}
+  // Retrieving the target's userInfo
+  function getUserInfo(address target) public view returns (string memory) {
+    return users[target].userInfo;
+  }
 
-// Setting the verStatus
-function verify() public {
-  require(
-    msg.sender == cra,
-    "Only cra has right to verify"
-  );
-  users[msg.sender].isVerified = true;
-}
+  // Unverify target
+  function verify(address target) public {
+    require(
+      msg.sender == cra,
+      "Only cra has right to verify"
+    );
+    users[target].isVerified = true;
+  }
+
+  // Unverify target
+  function unverify(address target) public {
+    require(
+      msg.sender == cra,
+      "Only cra has right to unverify"
+    );
+    users[target].isVerified = false;
+  }
 
 /* Adopting a pet
 function adopt(uint petId) public returns (uint) {
