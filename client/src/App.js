@@ -1,22 +1,32 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState, useEffect, useCallback } from 'react';
 
 function App() {
+  const [testVar, setTestVar] = useState();
+
+  const fetchTest = useCallback(async () => {
+    console.log('works so far');
+    let res = await fetch(`http://localhost:3001/`);
+    console.log(res);
+    res = await res.json();
+    console.log(res);
+    setTestVar(res.message);
+  }, []);
+
+  useEffect(() => {
+    console.log('test');
+    fetchTest();
+  }, [fetchTest]);
+
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Test message: {testVar}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
     </div>
   );
