@@ -3,7 +3,8 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  Link
 } from "react-router-dom";
 import Homepage from './components/Homepage';
 import Userpage from './components/Userpage';
@@ -14,6 +15,7 @@ import Login from "./components/Login.jsx"
 function App() {
   return (
     <Router>
+      <Link to="/" className='p-4 text-xl block font-bold text-blue-600 hover:text-blue-400'>Home</Link>
       <Routes>
         <Route path="/" element={<Homepage />} />
 

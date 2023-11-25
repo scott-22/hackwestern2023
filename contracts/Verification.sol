@@ -28,6 +28,10 @@ contract Verification {
       //getIsVerified(target) == false,
       "Only cra has right to getUserInfo"
     );
+    require(
+      !users[target].isVerified,
+      "Can only see info of unverified users"
+    );
     return users[target].userInfo;
   }
 

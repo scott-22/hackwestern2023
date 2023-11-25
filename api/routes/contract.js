@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-// const Contract = require('../../build/contracts/Contract.json');
+const VerificationContract = require('../../build/contracts/Verification.json');
 
 // Send the contract address
 router.get('/contract-address', (req, res, next) => {
@@ -15,7 +15,7 @@ router.get('/minter-address', (req, res, next) => {
 
 // Send the contract ABI
 router.get('/abi', function(req, res, next) {
-  // res.send(Contract["abi"]);
+  res.send(VerificationContract["abi"]);
 });
 
 module.exports = router;
