@@ -54,7 +54,7 @@ contract Verification {
   }
 
   // Set user info 
-  function setData(address target,string memory personalInfo) public {
+  function setData(address target, string memory personalInfo) public {
     require(
       msg.sender == cra,
       "Only cra has right to set data"
