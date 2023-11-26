@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 
 function Login() {
-  const API_URL = "http://localhost:3001/login";
+  const API_URL = "http://localhost:3001/users/getuser/";
 
   const [loggedin, setLoggedin] = useState(false);
   const [address, setAddress] = useState("");
@@ -48,7 +48,7 @@ function Login() {
     
     try {
       const address = await getAddress();
-      const response = await fetch(API_URL);
+      const response = await fetch(API_URL + address);
     
       const userinput = await response.json();
       console.log(userinput);
