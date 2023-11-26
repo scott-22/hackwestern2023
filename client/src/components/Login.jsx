@@ -65,7 +65,10 @@ function Login() {
         },
         body: JSON.stringify({address: address, identity: identity, name: name})
       })
-      response.json().then(data => console.log(data))
+
+      if (response.ok) {
+        window.location.reload(false)
+      }
     }
   }
 
