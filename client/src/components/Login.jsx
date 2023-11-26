@@ -36,26 +36,13 @@ function Login() {
     return currentAddress;
   }, []);
 
-  /*
-  async function logMovies() {
-    const response = await fetch("http://localhost:3001/login");
-    const userdata = await response.json();
-    
-    console.log(userdata);
-  }
-
-  function submitButton(e) {
-    logMovies();
-    e.preventDefault();
-  } */
-
-  const handleChangeSignin = async (event) => {
+  const handleChangeSignup = async (event) => {
     const inputname = event.target.value;
     setName(inputname);
     console.log(inputname);
   }
 
-  const handleSubmitSignin = async (event) => {
+  const handleSubmitSignup = async (event) => {
     event.preventDefault();
 
     const address = await this.getAddress();
@@ -73,11 +60,60 @@ function Login() {
   }
 
   return (
-    <form className = 'signIn' onSubmit= {this.handleSubmitSignin}>
+    /*<form className = 'signUp' onSubmit= {handleSubmitSignUp}>
       <label>Name:</label>
-      <input type="text" onChange={this.handleChangeSignin}></input>
-      <input type="submit" value="Sign In"/>
-    </form>
+      <input type="text" onChange={handleChangeSignup}></input>
+      <input type="submit" value="Sign Up"/>
+    </form>*/
+
+    <div
+      className="bg-gray-100 font-sans h-screen flex items-center"
+      style={{ margin: '0 auto' }}
+    >
+      <div
+        className="bg-white p-8 rounded shadow-md w-96"
+        style={{ marginLeft: 'auto', marginRight: 'auto' }}
+      >
+        <form className="text-left flex flex-wrap" onSubmit={handleSubmitSignup}>
+          <div className="mb-4 w-full">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Name:
+            </label>
+            <input
+              type="text"
+              id="name"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={handleChangeSignup}
+            />
+          </div>
+
+          <div className="mb-8 w-full">
+            <label className="block text-gray-700 text-sm font-bold mb-2">
+              Proof of identity:
+            </label>
+            <input
+              type="text"
+              id="verification"
+              className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="block mx-auto bg-blue-800 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Sign Up
+          </button>
+          
+          <button
+            type="button"
+            className="block mx-auto bg-blue-800 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
+    </div>
   );
 }
 

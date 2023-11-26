@@ -25,7 +25,7 @@ function CRApage() {
     console.log(craAddress)
     if (currentAddress === craAddress)
       setIsCRA(true);
-  }, []);
+  });
 
   const getContract = useCallback(async () => {
     let signer = null;
@@ -66,7 +66,7 @@ function CRApage() {
     }
     
     setDisplayTargetAddr(target);
-  })
+  });
 
   const onTargetAddrChange = useCallback((event) => {
     let text = event.target.value;
