@@ -1,7 +1,16 @@
 var express = require('express');
 var router = express.Router();
+const HDWalletProvider = require("@truffle/hdwallet-provider");
+const Web3 = require("web3");
 
 const VerificationContract = require('../../build/contracts/Verification.json');
+
+// Set up web3 provider to represent the CRA (for verifying and unverifying users via the smart contract)
+const provider = new HDWalletProvider({
+  mnemonic: process.env.MINTER_MNEMONIC,
+  providerOrUrl: "http://localhost:7545",
+});
+
 
 // Send the contract address
 router.get('/contract-address', (req, res, next) => {
