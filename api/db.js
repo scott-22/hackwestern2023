@@ -7,7 +7,10 @@ const username = process.env.DB_USER;
 const password  = process.env.DB_PASSWORD;
 const uri = `mongodb+srv://${username}:${password}@cluster0.rulvrss.mongodb.net?retryWrites=true&w=majority`
 
-mongoose.connect(uri);
+// For some reason, mongodb is only connecting using this older connection uri
+const uri2 = `mongodb://${username}:${password}@ac-2otqpt7-shard-00-00.rulvrss.mongodb.net:27017,ac-2otqpt7-shard-00-01.rulvrss.mongodb.net:27017,ac-2otqpt7-shard-00-02.rulvrss.mongodb.net:27017/?ssl=true&replicaSet=atlas-rhcjoa-shard-0&authSource=admin&retryWrites=true&w=majority`;
+
+mongoose.connect(uri2);
 
 var db = mongoose.connection;
 
@@ -25,8 +28,6 @@ var userSchema = new Schema({
 });
 
 var users = db.model('users', userSchema);
-
-console.log(db.readyState);
 
 module.exports = { users }
 
