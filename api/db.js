@@ -1,14 +1,13 @@
 var mongoose = require('mongoose');
-import { MongoClient, ServerApiVersion } from 'mongodb'
 require('dotenv').config({path: '../.env'});
 
 
 // MONGODB CONSTANTS
 const username = process.env.DB_USER;
 const password  = process.env.DB_PASSWORD;
-const uri = "mongodb+srv://" + username + ":" + password + "@cluster0.rulvrss.mongodb.net/?retryWrites=true&w=majority";
+const uri = `mongodb+srv://${username}:${password}@cluster0.rulvrss.mongodb.net?retryWrites=true&w=majority`
 
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true});
+mongoose.connect(uri);
 
 var db = mongoose.connection;
 
@@ -26,6 +25,8 @@ var userSchema = new Schema({
 });
 
 var users = db.model('users', userSchema);
+
+console.log(db.readyState);
 
 module.exports = { users }
 
