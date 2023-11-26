@@ -45,11 +45,12 @@ function Login() {
   const handleSubmitSignup = async (event) => {
     event.preventDefault();
 
-    const address = await this.getAddress();
+    
     try {
+      const address = await getAddress();
       const response = await fetch(API_URL);
     
-      const userinput = await response.json;
+      const userinput = await response.json();
       console.log(userinput);
       setName(userinput);
       setAddress(address);

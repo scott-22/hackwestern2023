@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-import { MongoClient, ServerApiVersion } from 'mongodb'
 require('dotenv').config({path: '../.env'});
 
 
