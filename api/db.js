@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
-dotenv.config();
-import { MongoClient, ServerApiVersion } from 'mongodb'
-
+require('dotenv').config()
+const { MongoClient, ServerApiVersion } = require('mongodb');
 
 // MONGODB CONSTANTS
 const username = process.env.DB_USER;
@@ -59,4 +57,4 @@ async function addUser(address) {
     }
 }
 
-export { findUser, addUser };
+module.exports = { findUser, addUser };
