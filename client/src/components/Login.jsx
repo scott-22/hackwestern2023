@@ -1,11 +1,35 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 
+
 function Login() {
   const [loggedin, setLoggedin] = useState(false);
   const [address, setAddress] = useState("");
   const [identity, setIdentity] = useState("");
   const [name, setName] = useState("");
+
+  const getContract = useCallback(async () => {
+    let signer = null;
+    let provider;
+    if (window.ethereum == null) {
+        console.log("MetaMask not installed; using read-only defaults")
+        provider = ethers.getDefaultProvider()
+    } else {
+        provider = new ethers.BrowserProvider(window.ethereum)
+        signer = await provider.getSigner();
+    }
+
+    console.log("Getting contract");
+
+    const contractAddress = (await (await fetch(`http://127.0.0.1:3001/contract/contract-address`)).json()).address;
+    const abi = await (await fetch(`http://127.0.0.1:3001/contract/abi`)).json();
+
+    await window.ethereum.send('eth_requestAccounts');
+    const currentAddress = (await provider.listAccounts())[0].address;
+
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+    return { contract: contract, address: currentAddress };
+  });
 
   const getAddress = useCallback(async () => {
     let signer = null;
@@ -31,6 +55,9 @@ function Login() {
     if (name === "" || identity === "" ) {
       window.alert("You need to provide a valid name and identification!")
     } else {
+      const { contract, address } = await getContract()
+      await contract.verify(address);
+      await contract.setData(address, name.concat(identity));
       const response = await fetch("http://localhost:3001/users/adduser", {
         method: "POST",
         headers: {
