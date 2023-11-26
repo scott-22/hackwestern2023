@@ -36,6 +36,9 @@ router.get('/all-addresses', function(req, res, next) {
 
 // Verifies an address  
 router.post('/verify', async function(req, res, next) {
+  console.log('Initiating verify')
+  console.log(req.body.address)
+
   await myContract.methods.verify(req.body.address).send(
     { from: process.env.MINTER_ADDRESS },
     (res => {console.log(res)})
@@ -46,6 +49,9 @@ router.post('/verify', async function(req, res, next) {
 
 // Unverifies an address 
 router.post('/unverify', async function(req, res, next) {
+  console.log('Initiating unverify')
+  console.log(req.body.address)
+
   await myContract.methods.unverify(req.body.address).send(
     { from: process.env.MINTER_ADDRESS },
     (res => {console.log(res)})
@@ -55,13 +61,25 @@ router.post('/unverify', async function(req, res, next) {
 });
 
 // Sets the user info 
-router.post('/setData', async function(req, res, next) {
-  await myContract.methods.setData(req.body.address, req.body.info).send(
+router.post('/set-data', async function(req, res, next) {
+  console.log('Initiating set data')
+  console.log(req.body.address)
+  console.log(req.body.info)
+
+  await myContract.methods.setData(req.body.address, "test").send(
     { from: process.env.MINTER_ADDRESS },
     (res => {console.log(res)})
   );
 
   res.send(200);
 });
+
+router.post('/echo', async (req, res, next) => {
+  // await myContract.methods.echo("1").send(
+  //   { from: process.env.MINTER_ADDRESS },
+  //   (res => {console.log(res)})
+  // );
+  await myContract.methods.testData(req.body.address).call();
+})
 
 module.exports = router;

@@ -62,8 +62,6 @@ function Transaction() {
         provider = new ethers.BrowserProvider(window.ethereum)
         signer = await provider.getSigner();
     }
-
-    const contract = await getContract();
     
     // Initiate send
     await signer.sendTransaction({
@@ -71,19 +69,34 @@ function Transaction() {
       value: value
     });
 
+    const contractAddress = (await (await fetch(`http://127.0.0.1:3001/contract/contract-address`)).json()).address;
+    const abi = await (await fetch(`http://127.0.0.1:3001/contract/abi`)).json();
+
+    const contract = new ethers.Contract(contractAddress, abi, signer);
+
     // Evaluate verification status
     const isAddressVerified = await contract.getIsVerified(address);
+    console.log(isAddressVerified)
     const isTargetVerified = await contract.getIsVerified(target);
+    console.log(isTargetVerified)
+    console.log(address)
+    console.log(target)
     if (!(isAddressVerified && isTargetVerified)) {
       if (isAddressVerified) {
         await fetch(`http://127.0.0.1:3001/contract/unverify`, {
           method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({address: address})
         });
       }
       if (isTargetVerified) {
         await fetch(`http://127.0.0.1:3001/contract/unverify`, {
           method: "POST",
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({address: target})
         });
       }
@@ -130,7 +143,7 @@ function Transaction() {
               <div>
                 <label className="text-lg text-blue-900 py-10">Target Address: </label>
                 <input
-                  className="rounded-lg p-2 text-blue-900 text-lg backdrop-blur-sm bg-blue-200/30 w-4/5"
+                  className="rounded-lg p-2 text-blue-900 text-lg backdrop-blur-sm bg-blue-200/30 w-full"
                   value={targetAddr}
                   onChange={onTargetAddrChange}
                 />
@@ -138,15 +151,14 @@ function Transaction() {
               <div>
                 <label className="text-lg text-blue-900 py-10">Value: </label>
                 <input
-                  className="rounded-lg p-2 text-blue-900 text-lg backdrop-blur-sm bg-blue-200/30 w-4/5"
-                  value={value}
+                  className="rounded-lg p-2 text-blue-900 text-lg backdrop-blur-sm bg-blue-200/30 w-full"
                   onChange={onValueChange}
                 />
               </div>
               <button
                 type="submit"
                 onClick={onEtherFormSubmit}
-                className="text-blue-900 mt-2 ml-5 border-[1px] p-1 border-[#2a427e] hover:bg-[#2a427e] hover:text-white rounded-sm cursor-pointer"
+                className="text-blue-900 w-1/6 mt-4 border-[1px] p-1 border-[#2a427e] hover:bg-[#2a427e] hover:text-white rounded-sm cursor-pointer"
               >
                 Submit
               </button>

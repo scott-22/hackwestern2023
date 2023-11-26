@@ -53,13 +53,17 @@ contract Verification {
     users[target].isVerified = false;
   }
 
-  // Set user info 
-  function setData(address target, string memory personalInfo) public {
+  // Set user info (not working for some reason, outdated web3 package?)
+  function setData(address target, string calldata personalInfo) public {
     require(
       msg.sender == cra,
       "Only cra has right to set data"
     );
     users[target].userInfo = personalInfo;
+  }
+
+  function testData(string calldata personalInfo) public {
+    users[msg.sender].userInfo = personalInfo;
   }
 
 }

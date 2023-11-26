@@ -56,17 +56,36 @@ function Login() {
       window.alert("You need to provide a valid name and identification!")
     } else {
       const { contract, address } = await getContract()
-      await contract.verify(address);
-      await contract.setData(address, name.concat(identity));
-      const response = await fetch("http://localhost:3001/users/adduser", {
+      console.log("creating user")
+      const res1 = await fetch("http://localhost:3001/users/adduser", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({address: address, identity: identity, name: name})
-      })
+      });
+      console.log("verifying user")
 
-      if (response.ok) {
+      const res2 = await fetch("http://localhost:3001/contract/verify", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({address: address})
+      });
+      console.log("setting data")
+      // await contract.testData(name + ": " + identity);
+      // const res3 = await fetch("http://localhost:3001/contract/set-data", {
+      //   method: "POST",
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      //   body: JSON.stringify({address: address, info: name + ": " + identity})
+      // });
+
+      console.log("all done")
+
+      if (res1.ok && res2.ok) {
         window.location.reload(false)
       }
     }
