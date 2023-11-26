@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { ethers } from "ethers";
 
 function Login() {
-  const API_URL = "http://localhost:3001/users/getuser/";
+  
 
   const [loggedin, setLoggedin] = useState(false);
   const [address, setAddress] = useState("");
@@ -19,46 +19,7 @@ function Login() {
     return current_address;
   } */
 
-  const getAddress = useCallback(async () => {
-    let signer = null;
-    let provider;
-    if (window.ethereum == null) {
-        console.log("MetaMask not installed; using read-only defaults")
-        provider = ethers.getDefaultProvider()
-    } else {
-        provider = new ethers.BrowserProvider(window.ethereum)
-        signer = await provider.getSigner();
-    }
-
-    await window.ethereum.send('eth_requestAccounts');
-    const currentAddress = (await provider.listAccounts())[0].address;
-    console.log(currentAddress);
-    return currentAddress;
-  }, []);
-
-  const handleChangeSignup = async (event) => {
-    const inputname = event.target.value;
-    setName(inputname);
-    console.log(inputname);
-  }
-
-  const handleSubmitSignup = async (event) => {
-    event.preventDefault();
-
-    
-    try {
-      const address = await getAddress();
-      const response = await fetch(API_URL + address);
-    
-      const userinput = await response.json();
-      console.log(userinput);
-      setName(userinput);
-      setAddress(address);
-      setLoggedin(true);
-    } catch (err) {
-      console.log(err.stack)
-    }    
-  }
+  
 
   return (
     /*<form className = 'signUp' onSubmit= {handleSubmitSignUp}>
@@ -75,7 +36,7 @@ function Login() {
         className="bg-white p-8 rounded shadow-md w-96"
         style={{ marginLeft: 'auto', marginRight: 'auto' }}
       >
-        <form className="text-left flex flex-wrap" onSubmit={handleSubmitSignup}>
+        <form className="text-left flex flex-wrap">
           <div className="mb-4 w-full">
             <label className="block text-gray-700 text-sm font-bold mb-2">
               Name:
@@ -84,7 +45,7 @@ function Login() {
               type="text"
               id="name"
               className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              onChange={handleChangeSignup}
+              
             />
           </div>
 
