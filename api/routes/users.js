@@ -27,8 +27,12 @@ router.get('/getuser/:addr', async (req, res, next) => {
 });
 
 router.post('/adduser', async (req, res, next) => {
+  console.log("Check if use exists")
+  console.log(req.body.address)
+  console.log(req.body)
+  console.log(req)
   // Check if user exists
-  const query = await users.findOne({address: req.body.addr});
+  const query = await users.findOne({address: req.body.address});
   if (query) {
     res.status(400).send(JSON.stringify({error: "User already exists"}));
     return;

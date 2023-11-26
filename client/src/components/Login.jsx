@@ -31,12 +31,14 @@ function Login() {
     if (name === "" || identity === "" ) {
       window.alert("You need to provide a valid name and identification!")
     } else {
-      console.log({address: address, identity: identity, name: name})
       const response = await fetch("http://localhost:3001/users/adduser", {
         method: "POST",
-        mode: "cors",
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: JSON.stringify({address: address, identity: identity, name: name})
       })
+      response.json().then(data => console.log(data))
     }
   }
 
